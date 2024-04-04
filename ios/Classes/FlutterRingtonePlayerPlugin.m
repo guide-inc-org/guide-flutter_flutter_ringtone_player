@@ -26,6 +26,12 @@ NSObject <FlutterPluginRegistrar> *pluginRegistrar = nil;
             AudioServicesCreateSystemSoundID(soundFileURLRef, &soundId);
         }
 
+        if (call.arguments[@"iosName"] != nil) {
+            NSString *path = [NSString stringWithFormat:@"/System/Library/Audio/UISounds/%@", call.arguments[@"iosName"]];
+            NSURL *fileURL = [NSURL URLWithString:path];
+            AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)fileURL,&soundId);
+        }
+
         // The iosSound overrides fromAsset if exists
         if (call.arguments[@"ios"] != nil) {
             soundId = (SystemSoundID) [call.arguments[@"ios"] integerValue];

@@ -25,6 +25,7 @@ class MethodChannelFlutterRingtonePlayer extends FlutterRingtonePlayerPlatform {
   Future<void> play({
     AndroidSound? android,
     IosSound? ios,
+    IosSoundName? iosName,
     String? fromAsset,
     String? fromFile,
     double? volume,
@@ -40,7 +41,7 @@ class MethodChannelFlutterRingtonePlayer extends FlutterRingtonePlayerPlatform {
       if (android == null) {
         throw "Please specify android sound.";
       }
-      if (ios == null) {
+      if (ios == null && iosName == null) {
         throw "Please specify ios sound.";
       }
     } else {
@@ -50,6 +51,7 @@ class MethodChannelFlutterRingtonePlayer extends FlutterRingtonePlayerPlatform {
       var args = <String, dynamic>{};
       if (android != null) args['android'] = android.value;
       if (ios != null) args['ios'] = ios.value;
+      if(iosName != null) args['iosName'] = iosName.value;
       if (fromAsset != null) args['uri'] = fromAsset;
       if (looping != null) args['looping'] = looping;
       if (volume != null) args['volume'] = volume;
@@ -86,7 +88,8 @@ class MethodChannelFlutterRingtonePlayer extends FlutterRingtonePlayerPlatform {
   }) {
     return play(
       android: AndroidSounds.notification,
-      ios: IosSounds.triTone,
+      // ios: IosSounds.triTone,
+      iosName: IosSoundName.notification,
       volume: volume,
       looping: looping,
       asAlarm: asAlarm,

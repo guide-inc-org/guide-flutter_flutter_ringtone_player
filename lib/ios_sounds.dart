@@ -18,6 +18,14 @@ class IosSound {
         assert(value <= 2000);
 }
 
+enum IosSoundName {
+  notification("sms-received1.caf");
+
+  final String value;
+
+  const IosSoundName(this.value);
+}
+
 /// Common values for [IosSound] as specified by file name.
 ///
 /// If you don't find desired sound here, you can always create it
